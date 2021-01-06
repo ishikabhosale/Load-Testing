@@ -47,20 +47,7 @@ def make_shell_context():
 # All routing will goes here
 @app.route('/')
 def home():
-    """
-    url = "http://128.199.22.204/v1/tests/"
-    payload={}
-    headers = {}
-    all_users = User.query.all()[0]
-    response = requests.request("GET", url, headers=headers, data=payload).json()
-    for test in response: 
-        p_id = test["id"]
-        d_t = test["updated_at"]
-        t = Test(predator_id = p_id, date_posted = d_t, author = all_users)
-        db.session.add(t)
-        db.session.commit()
-    return "yessss"
-    """
+    return "",200
 
 password1 = '123456'
 
@@ -239,29 +226,11 @@ def admin():
             for i in response:
                 result = getFirstReport(i["id"])
                 if result!= []:
-                    """
-                    i.add("last_success_rate" , result[0]["last_success_rate"])
-                    i.add("report_id", result[0]["report_id"] ) """
                     i["last_success_rate"] = result[0]["last_success_rate"]
                     i["report_id"] = result[0]["report_id"]
-
-                    """
-                    i.append(jsonify({
-                        "last_success_rate" : result[0]["last_success_rate"], 
-                        "report_id" : result[0]["report_id"]
-                    }))
-                    """
                 else:
                     i["last_success_rate"] = "No job yet"
                     i["report_id"] = '#'
-                    """
-                    i.add("last_success_rate" , "No job yet")
-                    i.add("report_id",'#')"""
-                    """
-                     i.append(jsonify({
-                        "last_success_rate" : "No job yet", 
-                        "report_id" : '#'
-                    })) """
 
                     print(i)
             return jsonify(
